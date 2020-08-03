@@ -25,6 +25,13 @@ static const char *colors[][3]      = {
         [SchemeSel]  = { col_bg2,   col_sel,   col_sel },
         [SchemeHid]  = { col_sel,   col_bg2,   col_sel },
 };
+static const char *const autostart[] = {
+        "nm-applet", NULL,
+        "redshift-gtk", NULL,
+        "element-desktop", "--hidden", NULL,
+        "feh", "--bg-center", "/usr/share/backgrounds/psy_forest.png", NULL,
+        NULL /* terminate */
+};
 
 /* tagging */
 static const char *tags[] = { ">_", "@", "#", "*" };
