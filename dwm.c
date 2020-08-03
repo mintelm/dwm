@@ -218,7 +218,6 @@ static void showhide(Client *c);
 static void sigchld(int unused);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
-static void tagmon(const Arg *arg);
 static void tile(Monitor *);
 static void bstack(Monitor *m);
 static void togglefloating(const Arg *arg);
@@ -1756,14 +1755,6 @@ tag(const Arg *arg)
                 focus(NULL);
                 arrange(selmon);
         }
-}
-
-void
-tagmon(const Arg *arg)
-{
-        if (!selmon->sel || !mons->next)
-                return;
-        sendmon(selmon->sel, dirtomon(arg->i));
 }
 
 void
