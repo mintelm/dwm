@@ -215,6 +215,7 @@ static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *);
+static void bstack(Monitor *m);
 static void togglefloating(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
@@ -1708,6 +1709,34 @@ tile(Monitor *m)
 			h = (m->wh - ty - m->gappoh - m->gappih * (r - 1)) / r;
 			resize(c, m->wx + mw + m->gappov, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappov, h - (2*c->bw), 0);
 			ty += HEIGHT(c) + m->gappih;
+		}
+}
+
+void
+bstack(Monitor *m)
+{
+	unsigned int i, n, w, r, mh, mx, tx;
+	Client *c;
+
+	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+	if (n == 0)
+		return;
+
+	if (n > m->nmaster)
+		mh = m->nmaster ? (m->wh + m->gappih) * m->mfact : 0;
+	else
+		mh = m->wh - 2*m->gappoh + m->gappih;
+	for (i = 0, mx = tx = m->gappov, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+		if (i < m->nmaster) {
+			r = MIN(n, m->nmaster) - i;
+			w = (m->ww - mx - m->gappov - m->gappiv * (r - 1)) / r;
+                        resize(c, m->wx + mx, m->wy + m->gappoh, w - (2*c->bw), mh - (2*c->bw) - m->gappih, 0);
+			mx += WIDTH(c) + m->gappiv;
+		} else {
+			r = n - i;
+			w = (m->ww - tx - m->gappov - m->gappiv * (r - 1)) / r;
+                        resize(c, m->wx + tx, m->wy + mh + m->gappoh, w - (2*c->bw), m->wh - mh - (2*c->bw) - 2*m->gappoh, 0);
+			tx += WIDTH(c) + m->gappiv;
 		}
 }
 
