@@ -867,32 +867,30 @@ drawbar(Monitor *m)
         Client *c;
 
         /* draw status first so it can be overdrawn by tags later */
-        if (m == selmon) { /* status is only drawn on selected monitor */
-                char *ts = stextc;
-                char *tp = stextc;
-                char ctmp;
+        char *ts = stextc;
+        char *tp = stextc;
+        char ctmp;
 
-                drw_setscheme(drw, scheme[SchemeNorm]);
-                x = drw_text(drw, m->ww - wstext, 0, lrpad / 2, bh, 0, "", 0); /* to keep left padding clean */
-                for (;;) {
-                        if ((unsigned char)*ts > LENGTH(colors) + 10) {
-                                ts++;
-                                continue;
-                        }
-                        ctmp = *ts;
-                        *ts = '\0';
-                        if (*tp != '\0')
-                                x = drw_text(drw, x, 0, TTEXTW(tp), bh, 0, tp, 0);
-                        if (ctmp == '\0')
-                                break;
-                        /* - 11 to compensate for + 10 above */
-                        drw_setscheme(drw, scheme[(unsigned char)ctmp - 11]);
-                        *ts = ctmp;
-                        tp = ++ts;
+        drw_setscheme(drw, scheme[SchemeNorm]);
+        x = drw_text(drw, m->ww - wstext, 0, lrpad / 2, bh, 0, "", 0); /* to keep left padding clean */
+        for (;;) {
+                if ((unsigned char)*ts > LENGTH(colors) + 10) {
+                        ts++;
+                        continue;
                 }
-                drw_setscheme(drw, scheme[SchemeNorm]);
-                drw_text(drw, x, 0, m->ww - x, bh, 0, "", 0); /* to keep right padding clean */
+                ctmp = *ts;
+                *ts = '\0';
+                if (*tp != '\0')
+                        x = drw_text(drw, x, 0, TTEXTW(tp), bh, 0, tp, 0);
+                if (ctmp == '\0')
+                        break;
+                /* - 11 to compensate for + 10 above */
+                drw_setscheme(drw, scheme[(unsigned char)ctmp - 11]);
+                *ts = ctmp;
+                tp = ++ts;
         }
+        drw_setscheme(drw, scheme[SchemeNorm]);
+        drw_text(drw, x, 0, m->ww - x, bh, 0, "", 0); /* to keep right padding clean */
 
         resizebarwin(m);
         for (c = m->clients; c; c = c->next) {
@@ -2455,6 +2453,7 @@ void
 updatestatus(void)
 {
         char rawstext[256];
+        Monitor* m;
 
         if (gettextprop(root, XA_WM_NAME, rawstext, sizeof rawstext)) {
                 char stextt[256];
@@ -2474,7 +2473,8 @@ updatestatus(void)
                 strcpy(stexts, stextc);
                 wstext = TEXTW(stextc);
         }
-        drawbar(selmon);
+        for(m = mons; m; m = m->next)
+                drawbar(m);
         updatesystray();
 }
 
