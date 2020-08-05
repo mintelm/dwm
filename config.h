@@ -15,7 +15,10 @@ static const int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 30;       /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
-static const char *fonts[]          = { "roboto-mono:size=10" };
+static const char *fonts[]          = {
+        "Roboto Mono:size=10",
+        "Symbols Nerd Font:size=13",
+};
 static const char col_fg[]          = "#ebdbb2";
 static const char col_bg[]          = "#1d2021";
 static const char col_bg2[]         = "#282828";
@@ -37,7 +40,7 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = { ">_", "@", "#", "*" };
+static const char *tags[] = { "", "", "", "" };
 
 static const Rule rules[] = {
         /* xprop(1):
