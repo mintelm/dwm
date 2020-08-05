@@ -209,7 +209,6 @@ static void focusstack(const Arg *arg);
 static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
-static unsigned int getsystraywidth();
 static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
 static void grabbuttons(Client *c, int focused);
 static void grabkeys(void);
@@ -528,7 +527,7 @@ buttonpress(XEvent *e)
                 } else if (ev->x < x + blw)
                         click = ClkLtSymbol;
                 /* 2px right padding */
-                else if (ev->x < selmon->ww - lrpad / 2 && ev->x >= selmon->ww - wstext + lrpad / 2 - 2 - getsystraywidth()) {
+                else if (ev->x < selmon->ww - lrpad / 2 && ev->x >= selmon->ww - wstext + lrpad / 2 - 2) {
                         click = ClkStatusText;
                 } else {
                         x += blw;
@@ -861,14 +860,11 @@ dirtomon(int dir)
 void
 drawbar(Monitor *m)
 {
-        int x, w, tw = 0, stw = 0, n = 0, scm;
+        int x, w, tw = 0, n = 0, scm;
         int boxs = drw->fonts->h / 9;
         int boxw = drw->fonts->h / 6 + 2;
         unsigned int i, occ = 0, urg = 0;
         Client *c;
-
-        if(showsystray && m == systraytomon(m))
-                stw = getsystraywidth();
 
         /* draw status first so it can be overdrawn by tags later */
         if (m == selmon) { /* status is only drawn on selected monitor */
@@ -877,7 +873,7 @@ drawbar(Monitor *m)
                 char ctmp;
 
                 drw_setscheme(drw, scheme[SchemeNorm]);
-                x = drw_text(drw, m->ww - wstext - getsystraywidth(), 0, lrpad / 2, bh, 0, "", 0); /* to keep left padding clean */
+                x = drw_text(drw, m->ww - wstext, 0, lrpad / 2, bh, 0, "", 0); /* to keep left padding clean */
                 for (;;) {
                         if ((unsigned char)*ts > LENGTH(colors) + 10) {
                                 ts++;
@@ -921,7 +917,7 @@ drawbar(Monitor *m)
         drw_setscheme(drw, scheme[SchemeNorm]);
         x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
-        if ((w = m->ww - tw - stw - wstext - x) > bh) {
+        if ((w = m->ww - tw - wstext - x) > bh) {
                 if (n > 0) {
                         int remainder = w % n;
                         int tabw = (1.0 / (double)n) * w + 1;
@@ -953,7 +949,7 @@ drawbar(Monitor *m)
 
         m->bt = n;
         m->btw = w;
-        drw_map(drw, m->barwin, 0, 0, m->ww - stw, bh);
+        drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 }
 
 void
@@ -1093,16 +1089,6 @@ getatomprop(Client *c, Atom prop)
                 XFree(p);
         }
         return atom;
-}
-
-unsigned int
-getsystraywidth()
-{
-        unsigned int w = 0;
-        Client *i;
-        if(showsystray)
-                for(i = systray->icons; i; w += i->w + systrayspacing, i = i->next) ;
-        return w ? w + systrayspacing : 1;
 }
 
 int
@@ -1582,8 +1568,6 @@ resize(Client *c, int x, int y, int w, int h, int interact)
 void
 resizebarwin(Monitor *m) {
         unsigned int w = m->ww;
-        if (showsystray && m == systraytomon(m))
-                w -= getsystraywidth();
         XMoveResizeWindow(dpy, m->barwin, m->wx, m->by, w, bh);
 }
 
@@ -2240,8 +2224,6 @@ updatebars(void)
                 if (m->barwin)
                         continue;
                 w = m->ww;
-                if (showsystray && m == systraytomon(m))
-                        w -= getsystraywidth();
                 m->barwin = XCreateWindow(dpy, root, m->wx, m->by, w, bh, 0, DefaultDepth(dpy, screen),
                                 CopyFromParent, DefaultVisual(dpy, screen),
                                 CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
@@ -2259,7 +2241,7 @@ updatebarcursor(int cursorpos)
         static int currentcursor = 0;
         int x;
 
-        if (BETWEEN(cursorpos, (x = selmon->ww - wstext + lrpad / 2 - getsystraywidth()), x + wstext - lrpad)) {
+        if (BETWEEN(cursorpos, (x = selmon->ww - wstext + lrpad / 2), x + wstext - lrpad)) {
                 updatedwmblockssig(x, cursorpos);
                 if (currentcursor) {
                         if (dwmblockssig <= 0 || dwmblockssig >= 10) {
@@ -2554,7 +2536,7 @@ updatesystray(void)
         XWindowChanges wc;
         Client *i;
         Monitor *m = systraytomon(NULL);
-        unsigned int x = m->mx + m->mw;
+        unsigned int x = m->mx + m->mw - wstext;
         unsigned int w = 1;
 
         if (!showsystray)
