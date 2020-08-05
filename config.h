@@ -31,6 +31,8 @@ static const char *const autostart[] = {
         "redshift-gtk", NULL,
         "element-desktop", "--hidden", NULL,
         "feh", "--bg-center", "/usr/share/backgrounds/psy_forest.png", NULL,
+        "pulse_daemon", NULL,
+        "dwmblocks", NULL,
         NULL /* terminate */
 };
 
@@ -113,7 +115,9 @@ static Button buttons[] = {
         { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
         { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
         { ClkWinTitle,          0,              Button2,        zoom,           {0} },
-        { ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+        { ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
+        { ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
+        { ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
         { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
         { ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
         { ClkWinTitle,          0,              Button1,        togglewin,      {0} },
