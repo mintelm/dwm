@@ -20,14 +20,17 @@ static const char *fonts[]          = {
         "Symbols Nerd Font:size=13",
 };
 static const char col_fg[]          = "#ebdbb2";
+static const char col_fg2[]         = "#987c76";
 static const char col_bg[]          = "#1d2021";
 static const char col_bg2[]         = "#282828";
 static const char col_sel[]         = "#fe8019";
 static const char *colors[][3]      = {
-        /*               fg         bg         border   */
-        [SchemeNorm] = { col_fg,    col_bg,    col_bg2 },
-        [SchemeSel]  = { col_bg2,   col_sel,   col_sel },
-        [SchemeHid]  = { col_sel,   col_bg2,   col_sel },
+        /*                   fg         bg         border   */
+        [SchemeNorm]     = { col_fg,    col_bg,    col_bg2 },
+        [SchemeSel]      = { col_bg2,   col_sel,   col_sel },
+        [SchemeTaskNorm] = { col_fg,    col_bg,    col_bg2 },
+        [SchemeTaskSel]  = { col_sel,   col_bg2,   col_sel },
+        [SchemeTaskHid]  = { col_fg2,   col_bg,    col_sel },
 };
 static const char *const autostart[] = {
         "nm-applet", NULL,

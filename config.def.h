@@ -23,10 +23,12 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
-        /*               fg         bg         border   */
-        [SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-        [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-        [SchemeHid]  = { col_cyan,  col_gray1, col_cyan  },
+        /*                   fg         bg         border   */
+        [SchemeNorm]     = { col_gray3, col_gray1, col_gray2 },
+        [SchemeSel]      = { col_gray4, col_cyan,  col_cyan  },
+        [SchemeTaskNorm] = { col_gray3, col_gray1, col_gray2 },
+        [SchemeTaskSel]  = { col_gray4, col_cyan,  col_cyan  },
+        [SchemeTaskHid]  = { col_cyan,  col_gray1, col_cyan  },
 };
 static const char *const autostart[] = {
         "st", NULL,

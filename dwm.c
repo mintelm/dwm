@@ -81,7 +81,8 @@
 
 /* enums */
 enum { CurNormal, CurHand, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel, SchemeHid }; /* color schemes */
+enum { SchemeNorm, SchemeSel,
+       SchemeTaskNorm, SchemeTaskSel, SchemeTaskHid }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
@@ -921,15 +922,17 @@ drawbar(Monitor *m)
                 if (n > 0) {
                         int remainder = w % n;
                         int tabw = (1.0 / (double)n) * w + 1;
+                        char hidden_name[256] = "";
                         for (c = m->clients; c; c = c->next) {
+                                memset(hidden_name, 0, strlen(hidden_name));
                                 if (!ISVISIBLE(c))
                                         continue;
                                 if (m->sel == c)
-                                        scm = SchemeSel;
+                                        scm = SchemeTaskSel;
                                 else if (HIDDEN(c))
-                                        scm = SchemeHid;
+                                        scm = SchemeTaskHid;
                                 else
-                                        scm = SchemeNorm;
+                                        scm = SchemeTaskNorm;
                                 drw_setscheme(drw, scheme[scm]);
 
                                 if (remainder >= 0) {
