@@ -36,6 +36,7 @@ static const char *const autostart[] = {
         "feh", "--bg-center", "/usr/share/backgrounds/psy_forest.png", NULL,
         "pulse_daemon", NULL,
         "dwmblocks", NULL,
+        "picom", NULL,
         NULL /* terminate */
 };
 
