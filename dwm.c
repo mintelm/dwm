@@ -941,7 +941,12 @@ drawbar(Monitor *m)
                                         }
                                         remainder--;
                                 }
-                                drw_text(drw, x, 0, tabw, bh, lrpad / 2, c->name, 0);
+                                if (HIDDEN(c)) {
+                                        strcat(hidden_name, "[-] ");
+                                        strcat(hidden_name, c->name);
+                                        drw_text(drw, x, 0, tabw, bh, lrpad / 2, hidden_name, 0);
+                                } else
+                                        drw_text(drw, x, 0, tabw, bh, lrpad / 2, c->name, 0);
                                 x += tabw;
                         }
                 } else {
