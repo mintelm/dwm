@@ -29,14 +29,14 @@ static const char *colors[][3]      = {
         [SchemeNorm]     = { col_fg,    col_bg,    col_bg2 },
         [SchemeSel]      = { col_bg2,   col_sel,   col_sel },
         [SchemeTaskNorm] = { col_fg,    col_bg,    col_bg2 },
-        [SchemeTaskSel]  = { col_sel,   col_bg2,   col_sel },
+        [SchemeTaskSel]  = { col_fg,    col_bg2,   col_sel },
         [SchemeTaskHid]  = { col_fg2,   col_bg,    col_sel },
 };
 static const char *const autostart[] = {
         "nm-applet", NULL,
         "redshift-gtk", NULL,
         "element-desktop", "--hidden", NULL,
-        "feh", "--bg-center", "/usr/share/backgrounds/psy_forest.png", NULL,
+        "feh", "--bg-center", "/usr/share/backgrounds/simple_dark.png", NULL,
         "pulse_daemon", NULL,
         "dwmblocks", NULL,
         "picom", NULL,
