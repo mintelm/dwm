@@ -1,4 +1,3 @@
-/* See LICENSE file for copyright and license details. */
 
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
@@ -53,13 +52,14 @@ static const Rule rules[] = {
          */
         /* class        instance    title       tags mask     isCentered   isFloating   monitor */
         { "Galculator", NULL,       NULL,       0,            1,           1,           -1 },
-        { "Gpick",      NULL,       NULL,       0,            1,           1,           -1 }
+        { "Gpick",      NULL,       NULL,       0,            1,           1,           -1 },
+        { "Pavucontrol",NULL,       NULL,       0,            0,           1,           -1 },
 };
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
         /* symbol     arrange function */
