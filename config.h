@@ -1,3 +1,4 @@
+#include <X11/XF86keysym.h>
 
 /* general */
 static const int nmaster           = 1;         /* number of clients in master area */
@@ -99,32 +100,34 @@ static const char *browsercmd[] = { "google-chrome-stable", NULL };
 static const char *calccmd[]    = { "galculator", NULL };
 
 static Key keys[] = {
-        /* modifier                     key        function        argument */
-        TAGKEYS(                        XK_1,                      0)
-        TAGKEYS(                        XK_2,                      1)
-        TAGKEYS(                        XK_3,                      2)
-        TAGKEYS(                        XK_4,                      3)
-        { MODKEY,                       XK_r,      spawn,          {.v = roficmd } },
-        { MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-        { MODKEY,                       XK_w,      spawn,          {.v = browsercmd } },
-        { MODKEY,                       XK_c,      spawn,          {.v = calccmd } },
-        { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-        { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-        { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-        { MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-        { MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-        { MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-        { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-        { MODKEY,                       XK_b,      setlayout,      {.v = &layouts[1]} },
-        { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-        { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[3]} },
-        { MODKEY|ShiftMask,             XK_f,      togglefloating, {0} },
-        { MODKEY,                       XK_Tab,    view,           {0} },
-        { MODKEY,                       XK_space,  zoom,           {0} },
-        { MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
-        { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-        { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-        { MODKEY|ShiftMask,             XK_r,      quit,           {0} },
+        /* modifier                     key                     function        argument */
+        TAGKEYS(                        XK_1,                                   0)
+        TAGKEYS(                        XK_2,                                   1)
+        TAGKEYS(                        XK_3,                                   2)
+        TAGKEYS(                        XK_4,                                   3)
+        { MODKEY,                       XK_r,                   spawn,          {.v = roficmd } },
+        { MODKEY,                       XK_Return,              spawn,          {.v = termcmd } },
+        { MODKEY,                       XK_w,                   spawn,          {.v = browsercmd } },
+        { MODKEY,                       XK_c,                   spawn,          {.v = calccmd } },
+        { MODKEY,                       XK_j,                   focusstack,     {.i = +1 } },
+        { MODKEY,                       XK_k,                   focusstack,     {.i = -1 } },
+        { MODKEY,                       XK_i,                   incnmaster,     {.i = +1 } },
+        { MODKEY,                       XK_d,                   incnmaster,     {.i = -1 } },
+        { MODKEY,                       XK_h,                   setmfact,       {.f = -0.05} },
+        { MODKEY,                       XK_l,                   setmfact,       {.f = +0.05} },
+        { MODKEY,                       XK_t,                   setlayout,      {.v = &layouts[0]} },
+        { MODKEY,                       XK_b,                   setlayout,      {.v = &layouts[1]} },
+        { MODKEY,                       XK_m,                   setlayout,      {.v = &layouts[2]} },
+        { MODKEY,                       XK_f,                   setlayout,      {.v = &layouts[3]} },
+        { MODKEY|ShiftMask,             XK_f,                   togglefloating, {0} },
+        { MODKEY,                       XK_Tab,                 view,           {0} },
+        { MODKEY,                       XK_space,               zoom,           {0} },
+        { MODKEY|ShiftMask,             XK_q,                   killclient,     {0} },
+        { MODKEY,                       XK_comma,               focusmon,       {.i = -1 } },
+        { MODKEY,                       XK_period,              focusmon,       {.i = +1 } },
+        { MODKEY|ShiftMask,             XK_r,                   quit,           {0} },
+        { 0,                    XF86XK_MonBrightnessDown,       spawn,          SHCMD("dec_brightness") },
+        { 0,                    XF86XK_MonBrightnessUp,         spawn,          SHCMD("inc_brightness") },
 };
 
 /* button definitions */
