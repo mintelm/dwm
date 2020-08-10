@@ -128,6 +128,9 @@ static Key keys[] = {
         { MODKEY|ShiftMask,             XK_r,                   quit,           {0} },
         { 0,                    XF86XK_MonBrightnessDown,       spawn,          SHCMD("dec_brightness") },
         { 0,                    XF86XK_MonBrightnessUp,         spawn,          SHCMD("inc_brightness") },
+        { 0,                    XF86XK_AudioLowerVolume,        spawn,          SHCMD("pamixer -d 5") },
+        { 0,                    XF86XK_AudioRaiseVolume,        spawn,          SHCMD("pamixer -i 5") },
+        { 0,                    XF86XK_AudioMute,               spawn,          SHCMD("pamixer --toggle-mute") },
 };
 
 /* button definitions */
