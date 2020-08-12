@@ -27,15 +27,15 @@ static const unsigned int systrayspacing = 5;   /* systray spacing */
 
 /* fonts */
 static const char *fonts[]          = {
-        "Roboto Mono:size=10",
-        "Symbols Nerd Font:size=13",
+        "Fiora Code:style:Medium:size=10:antialias=true:autohint=true",
+        "Symbols Nerd Font:size=13:antialias=true:autohint=true",
 };
 
 /* colors */
 static const char col_fg[]          = "#ebdbb2";
 static const char col_fg2[]         = "#987c76";
 static const char col_bg[]          = "#1d2021";
-static const char col_bg2[]         = "#282828";
+static const char col_bg2[]         = "#3c3836";
 static const char col_sel[]         = "#fe8019";
 static const char *colors[][3]      = {
         /*                   fg         bg         border   */
@@ -51,10 +51,10 @@ static const char *const autostart[] = {
         "nm-applet", NULL,
         "redshift-gtk", NULL,
         "element-desktop", "--hidden", NULL,
-        "feh", "--bg-center", "/usr/share/backgrounds/simple_dark.png", NULL,
+        "feh", "--bg-center", "/usr/share/backgrounds/sunset.png", NULL,
         "pulse_daemon", NULL,
         "dwmblocks", NULL,
-        "picom", NULL,
+        "picom", "--experimental-backends", NULL,
         NULL /* terminate */
 };
 
@@ -95,7 +95,6 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *roficmd[]    = { "rofi", "-show", "run", "-theme", "gruvbox.rasi", "-lines", "7", NULL };
-static const char *termcmd[]    = { "alacritty", NULL };
 static const char *browsercmd[] = { "google-chrome-stable", NULL };
 static const char *calccmd[]    = { "galculator", NULL };
 
@@ -106,7 +105,7 @@ static Key keys[] = {
         TAGKEYS(                        XK_3,                                   2)
         TAGKEYS(                        XK_4,                                   3)
         { MODKEY,                       XK_r,                   spawn,          {.v = roficmd } },
-        { MODKEY,                       XK_Return,              spawn,          {.v = termcmd } },
+        { MODKEY,                       XK_Return,              spawn,          SHCMD("st") },
         { MODKEY,                       XK_w,                   spawn,          {.v = browsercmd } },
         { MODKEY,                       XK_c,                   spawn,          {.v = calccmd } },
         { MODKEY,                       XK_j,                   focusstack,     {.i = +1 } },
