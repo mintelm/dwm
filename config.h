@@ -49,13 +49,13 @@ static const char *colors[][3]      = {
 
 /* autostart */
 static const char *const autostart[] = {
+        "element-desktop", "--hidden", NULL,
         "nm-applet", NULL,
         "redshift-gtk", NULL,
-        "element-desktop", "--hidden", NULL,
-        "feh", "--bg-center", "/usr/share/backgrounds/sunset.png", NULL,
+        "feh", "--bg-max", "/usr/share/backgrounds/sunset.png", NULL,
         "pulse_daemon", NULL,
         "dwmblocks", NULL,
-        "picom", "--experimental-backends", NULL,
+        // "picom", "--experimental-backends", NULL,
         NULL /* terminate */
 };
 
