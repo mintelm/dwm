@@ -2631,7 +2631,7 @@ updatesystray(void)
                         return;
                 }
         }
-        for (w = 0, i = systray->icons; i; i = i->next) {
+        for (w = systraypadding, i = systray->icons; i; i = i->next) {
                 /* make sure the background color stays the same */
                 wa.background_pixel  = scheme[SchemeNorm][ColBg].pixel;
                 XChangeWindowAttributes(dpy, i->win, CWBackPixel, &wa);
@@ -2643,7 +2643,7 @@ updatesystray(void)
                 if (i->mon != m)
                         i->mon = m;
         }
-        w = w ? w + systrayspacing : 1;
+        w = w ? w + systrayspacing + systraypadding : 1;
         x -= w;
         XMoveResizeWindow(dpy, systray->win, x, m->by, w, bh);
         wc.x = x; wc.y = m->by; wc.width = w; wc.height = bh;
