@@ -28,7 +28,7 @@ static const unsigned int systraypadding = 12;  /* systray padding */
 
 /* fonts */
 static const char *fonts[]          = {
-        "Fiora Code:style:Medium:size=10:antialias=true:autohint=true",
+        "Noto Sans:style:Medium:size=10:antialias=true:autohint=true",
         "Symbols Nerd Font:size=13:antialias=true:autohint=true",
 };
 
@@ -55,7 +55,7 @@ static const char *const autostart[] = {
         "feh", "--bg-max", "/usr/share/backgrounds/sunset.png", NULL,
         "pulse_daemon", NULL,
         "dwmblocks", NULL,
-        // "picom", "--experimental-backends", NULL,
+        "picom", "--experimental-backends", NULL,
         NULL /* terminate */
 };
 
