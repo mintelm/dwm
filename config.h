@@ -55,7 +55,8 @@ static const char *const autostart[] = {
         "feh", "--bg-max", "/usr/share/backgrounds/sunset.png", NULL,
         "pulse_daemon", NULL,
         "dwmblocks", NULL,
-        "picom", "--experimental-backends", NULL,
+        "picom", NULL,
+        "optimus-manager-qt", NULL,
         NULL /* terminate */
 };
 
@@ -106,7 +107,7 @@ static Key keys[] = {
         TAGKEYS(                        XK_3,                                   2)
         TAGKEYS(                        XK_4,                                   3)
         { MODKEY,                       XK_r,                   spawn,          {.v = roficmd } },
-        { MODKEY,                       XK_Return,              spawn,          SHCMD("st") },
+        { MODKEY,                       XK_Return,              spawn,          SHCMD("alacritty") },
         { MODKEY,                       XK_w,                   spawn,          {.v = browsercmd } },
         { MODKEY,                       XK_c,                   spawn,          {.v = calccmd } },
         { MODKEY,                       XK_j,                   focusstack,     {.i = +1 } },
