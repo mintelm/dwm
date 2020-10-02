@@ -126,6 +126,8 @@ static Key keys[] = {
         { MODKEY|ShiftMask,             XK_q,                   killclient,     {0} },
         { MODKEY,                       XK_comma,               focusmon,       {.i = -1 } },
         { MODKEY,                       XK_period,              focusmon,       {.i = +1 } },
+        { MODKEY|ShiftMask,             XK_comma,               tagmon,         {.i = -1 } },
+        { MODKEY|ShiftMask,             XK_period,              tagmon,         {.i = +1 } },
         { MODKEY|ShiftMask,             XK_r,                   quit,           {0} },
         { 0,                    XF86XK_MonBrightnessDown,       spawn,          SHCMD("dec_brightness") },
         { 0,                    XF86XK_MonBrightnessUp,         spawn,          SHCMD("inc_brightness") },
