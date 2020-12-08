@@ -51,6 +51,7 @@ static const char *colors[][3]      = {
 static const char *const autostart[] = {
         "element-desktop", "--hidden", NULL,
         "nm-applet", NULL,
+        "dunst", NULL,
         "redshift-gtk", NULL,
         "feh", "--bg-max", "/home/mario/.local/share/wallpapers/sunset.png", NULL,
         "pulse_daemon", NULL,
